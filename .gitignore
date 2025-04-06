@@ -2,3 +2,6 @@ sonar-project.properties
 coverage.out
 report.json
 .scannerwork
+**/*scratch*
+**/*Scratch*
+testSub
