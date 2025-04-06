@@ -274,7 +274,88 @@ func TestAssertEqualsDifferentTypesNegative(t *testing.T) {
 }
 
 // ----------------
-// AssertEquals
+// AssertAlmostEqualsInt
+// ----------------
+func TestAssertAlmostEqualsIntPositive(t *testing.T) {
+	checkAssertAlmostEqualsIntPositive(int(1), int(1), "int(1),int(1)", t)
+	checkAssertAlmostEqualsIntPositive(int(1), int8(1), "int(1),int8(1)", t)
+	checkAssertAlmostEqualsIntPositive(int(1), int16(1), "int(1),int16(1)", t)
+	checkAssertAlmostEqualsIntPositive(int(1), int32(1), "int(1),int32(1)", t)
+	checkAssertAlmostEqualsIntPositive(int(1), int64(1), "int(1),int64(1)", t)
+	checkAssertAlmostEqualsIntPositive(int(1), uint(1), "int(1),uint(1)", t)
+	checkAssertAlmostEqualsIntPositive(int(1), uint8(1), "int(1),uint8(1)", t)
+	checkAssertAlmostEqualsIntPositive(int(1), uint16(1), "int(1),uint16(1)", t)
+	checkAssertAlmostEqualsIntPositive(int(1), uint32(1), "int(1),uint32(1)", t)
+	checkAssertAlmostEqualsIntPositive(int(1), uint64(1), "int(1),uint64(1)", t)
+	checkAssertAlmostEqualsIntPositive(uint(1), int(1), "uint(1),int(1)", t)
+	checkAssertAlmostEqualsIntPositive(uint(1), int8(1), "uint(1),int8(1)", t)
+	checkAssertAlmostEqualsIntPositive(uint(1), int16(1), "uint(1),int16(1)", t)
+	checkAssertAlmostEqualsIntPositive(uint(1), int32(1), "uint(1),int32(1)", t)
+	checkAssertAlmostEqualsIntPositive(uint(1), int64(1), "uint(1),int64(1)", t)
+	checkAssertAlmostEqualsIntPositive(uint(1), uint(1), "uint(1),uint(1)", t)
+	checkAssertAlmostEqualsIntPositive(uint(1), uint8(1), "uint(1),uint8(1)", t)
+	checkAssertAlmostEqualsIntPositive(uint(1), uint16(1), "uint(1),uint16(1)", t)
+	checkAssertAlmostEqualsIntPositive(uint(1), uint32(1), "uint(1),uint32(1)", t)
+	checkAssertAlmostEqualsIntPositive(uint(1), uint64(1), "uint(1),uint64(1)", t)
+	checkAssertAlmostEqualsIntPositive(int(-1), int(-1), "int(-1),int(-1)", t)
+	checkAssertAlmostEqualsIntPositive(int(-1), int8(-1), "int(-1),int8(-1)", t)
+	checkAssertAlmostEqualsIntPositive(int(-1), int16(-1), "int(-1),int16(-1)", t)
+	checkAssertAlmostEqualsIntPositive(int(-1), int32(-1), "int(-1),int32(-1)", t)
+	checkAssertAlmostEqualsIntPositive(int(-1), int64(-1), "int(-1),int64(-1)", t)
+}
+
+func checkAssertAlmostEqualsIntPositive[X IntNumber, Y IntNumber](expected X, actual Y, testUnitName string, t *testing.T) {
+	tc := testing.T{}
+	AssertAlmostEqualsInt(expected, actual, &tc, testUnitName)
+	if tc.Failed() {
+		t.Errorf("AssertAlmostEqualsInt is failed at %s", testUnitName)
+	}
+}
+
+func TestAssertAlmostEqualsIntNegative(t *testing.T) {
+	checkAssertAlmostEqualsIntNegative(int(1), int(2), "int(1),int(2)", t)
+	checkAssertAlmostEqualsIntNegative(int(1), int8(2), "int(1),int8(2)", t)
+	checkAssertAlmostEqualsIntNegative(int(1), int16(2), "int(1),int16(2)", t)
+	checkAssertAlmostEqualsIntNegative(int(1), int32(2), "int(1),int32(2)", t)
+	checkAssertAlmostEqualsIntNegative(int(1), int64(2), "int(1),int64(2)", t)
+	checkAssertAlmostEqualsIntNegative(int(1), uint(2), "int(1),uint(2)", t)
+	checkAssertAlmostEqualsIntNegative(int(1), uint8(2), "int(1),uint8(2)", t)
+	checkAssertAlmostEqualsIntNegative(int(1), uint16(2), "int(1),uint16(2)", t)
+	checkAssertAlmostEqualsIntNegative(int(1), uint32(2), "int(1),uint32(2)", t)
+	checkAssertAlmostEqualsIntNegative(int(1), uint64(2), "int(1),uint64(2)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), int(2), "uint(1),int(2)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), int8(2), "uint(1),int8(2)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), int16(2), "uint(1),int16(2)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), int32(2), "uint(1),int32(2)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), int64(2), "uint(1),int64(2)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), uint(2), "uint(1),uint(2)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), uint8(2), "uint(1),uint8(2)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), uint16(2), "uint(1),uint16(2)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), uint32(2), "uint(1),uint32(2)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), uint64(2), "uint(1),uint64(2)", t)
+
+	checkAssertAlmostEqualsIntNegative(int(-1), uint(1), "int(-1),uint(1)", t)
+	checkAssertAlmostEqualsIntNegative(int(-1), uint8(1), "int(-1),uint8(1)", t)
+	checkAssertAlmostEqualsIntNegative(int(-1), uint16(1), "int(-1),uint16(1)", t)
+	checkAssertAlmostEqualsIntNegative(int(-1), uint32(1), "int(-1),uint32(1)", t)
+	checkAssertAlmostEqualsIntNegative(int(-1), uint64(1), "int(-1),uint64(1)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), int(-1), "uint(1),int(-1)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), int8(-1), "uint(1),int8(-1)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), int16(-1), "uint(1),int16(-1)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), int32(-1), "uint(1),int32(-1)", t)
+	checkAssertAlmostEqualsIntNegative(uint(1), int64(-1), "uint(1),int64(-1)", t)
+}
+
+func checkAssertAlmostEqualsIntNegative[X IntNumber, Y IntNumber](expected X, actual Y, testUnitName string, t *testing.T) {
+	tc := testing.T{}
+	AssertAlmostEqualsInt(expected, actual, &tc, testUnitName)
+	if !tc.Failed() {
+		t.Errorf("AssertAlmostEqualsInt is not failed at %s", testUnitName)
+	}
+}
+
+// ----------------
+// AssertNotEquals
 // ----------------
 func TestAssertNotEqualsDifferentValuesPositive(t *testing.T) {
 	tc := testing.T{}
@@ -300,6 +381,87 @@ func TestAssertNotEqualsNegative(t *testing.T) {
 	AssertNotEquals(i, i, &tc, "AssertEquals")
 	if !tc.Failed() {
 		t.Error("AssertNotEquals is not failed")
+	}
+}
+
+// ----------------
+// AssertAlmostEqualsInt
+// ----------------
+func TestAssertNotAlmostEqualsIntPositive(t *testing.T) {
+	checkAssertNotAlmostEqualsIntPositive(int(1), int(2), "int(1),int(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(1), int8(2), "int(1),int8(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(1), int16(2), "int(1),int16(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(1), int32(2), "int(1),int32(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(1), int64(2), "int(1),int64(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(1), uint(2), "int(1),uint(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(1), uint8(2), "int(1),uint8(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(1), uint16(2), "int(1),uint16(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(1), uint32(2), "int(1),uint32(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(1), uint64(2), "int(1),uint64(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), int(2), "uint(1),int(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), int8(2), "uint(1),int8(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), int16(2), "uint(1),int16(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), int32(2), "uint(1),int32(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), int64(2), "uint(1),int64(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), uint(2), "uint(1),uint(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), uint8(2), "uint(1),uint8(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), uint16(2), "uint(1),uint16(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), uint32(2), "uint(1),uint32(2)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), uint64(2), "uint(1),uint64(2)", t)
+
+	checkAssertNotAlmostEqualsIntPositive(int(-1), uint(1), "int(-1),uint(1)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(-1), uint8(1), "int(-1),uint8(1)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(-1), uint16(1), "int(-1),uint16(1)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(-1), uint32(1), "int(-1),uint32(1)", t)
+	checkAssertNotAlmostEqualsIntPositive(int(-1), uint64(1), "int(-1),uint64(1)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), int(-1), "uint(1),int(-1)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), int8(-1), "uint(1),int8(-1)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), int16(-1), "uint(1),int16(-1)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), int32(-1), "uint(1),int32(-1)", t)
+	checkAssertNotAlmostEqualsIntPositive(uint(1), int64(-1), "uint(1),int64(-1)", t)
+}
+
+func checkAssertNotAlmostEqualsIntPositive[X IntNumber, Y IntNumber](expected X, actual Y, testUnitName string, t *testing.T) {
+	tc := testing.T{}
+	AssertNotAlmostEqualsInt(expected, actual, &tc, testUnitName)
+	if tc.Failed() {
+		t.Errorf("AssertNotAlmostEqualsInt is failed at %s", testUnitName)
+	}
+}
+
+func TestAssertNotAlmostEqualsIntNegative(t *testing.T) {
+	checkAssertNotAlmostEqualsIntNegative(int(1), int(1), "int(1),int(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(1), int8(1), "int(1),int8(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(1), int16(1), "int(1),int16(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(1), int32(1), "int(1),int32(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(1), int64(1), "int(1),int64(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(1), uint(1), "int(1),uint(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(1), uint8(1), "int(1),uint8(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(1), uint16(1), "int(1),uint16(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(1), uint32(1), "int(1),uint32(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(1), uint64(1), "int(1),uint64(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(uint(1), int(1), "uint(1),int(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(uint(1), int8(1), "uint(1),int8(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(uint(1), int16(1), "uint(1),int16(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(uint(1), int32(1), "uint(1),int32(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(uint(1), int64(1), "uint(1),int64(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(uint(1), uint(1), "uint(1),uint(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(uint(1), uint8(1), "uint(1),uint8(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(uint(1), uint16(1), "uint(1),uint16(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(uint(1), uint32(1), "uint(1),uint32(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(uint(1), uint64(1), "uint(1),uint64(1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(-1), int(-1), "int(-1),int(-1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(-1), int8(-1), "int(-1),int8(-1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(-1), int16(-1), "int(-1),int16(-1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(-1), int32(-1), "int(-1),int32(-1)", t)
+	checkAssertNotAlmostEqualsIntNegative(int(-1), int64(-1), "int(-1),int64(-1)", t)
+}
+
+func checkAssertNotAlmostEqualsIntNegative[X IntNumber, Y IntNumber](expected X, actual Y, testUnitName string, t *testing.T) {
+	tc := testing.T{}
+	AssertNotAlmostEqualsInt(expected, actual, &tc, testUnitName)
+	if !tc.Failed() {
+		t.Errorf("AssertNotAlmostEqualsInt is not failed at %s", testUnitName)
 	}
 }
 

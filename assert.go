@@ -6,6 +6,15 @@ import (
 	"testing"
 )
 
+type IntNumber interface {
+	int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64
+}
+
+const (
+	equalFailedMessageTemplate    = "Element %s is not as expected. expected: '%v' actual: '%v'"
+	notEqualFailedMessageTemplate = "Element %s equals the unexpected. unexpected: '%v' actual: '%v'"
+)
+
 // Checks that 'actual' is not nil. If it is nil [testing.T.Errorf] will be called
 func AssertNotNil(actual any, t *testing.T, objectName string) {
 	t.Helper()
@@ -39,7 +48,16 @@ func AssertEquals(expected any, actual any, t *testing.T, objectName string) {
 	t.Helper()
 	AssertNotNil(actual, t, objectName)
 	if expected != actual {
-		t.Errorf("Element %s is not as expected. expected: '%v' actual: '%v'", objectName, expected, actual)
+		t.Errorf(equalFailedMessageTemplate, objectName, expected, actual)
+	}
+}
+
+// Checks that 'actual' is not nil and equal to 'expected' when both are transformed to an int64/uint64 before comparison. If it is nil or not equal [testing.T.Errorf] will be called
+func AssertAlmostEqualsInt[X IntNumber, Y IntNumber](expected X, actual Y, t *testing.T, objectName string) {
+	t.Helper()
+	AssertNotNil(actual, t, objectName)
+	if isNotAlmostEqualInt(expected, actual) {
+		t.Errorf(equalFailedMessageTemplate, objectName, expected, actual)
 	}
 }
 
@@ -48,10 +66,18 @@ func AssertNotEquals(notExpected any, actual any, t *testing.T, objectName strin
 	t.Helper()
 	AssertNotNil(actual, t, objectName)
 	if notExpected == actual {
-		t.Errorf("Element %s equals the unexpected. unexpected: '%v' actual: '%v'", objectName, notExpected, actual)
+		t.Errorf(notEqualFailedMessageTemplate, objectName, notExpected, actual)
 	}
 }
 
+// Checks that 'actual' is not nil and not equal to 'expected' when both are transformed to an int64/uint64 before comparison. If it is nil or equal [testing.T.Errorf] will be called
+func AssertNotAlmostEqualsInt[X IntNumber, Y IntNumber](notExpected X, actual Y, t *testing.T, objectName string) {
+	t.Helper()
+	AssertNotNil(actual, t, objectName)
+	if !isNotAlmostEqualInt(notExpected, actual) {
+		t.Errorf(notEqualFailedMessageTemplate, objectName, notExpected, actual)
+	}
+}
 
 // Checks that 'actual' is not nil and has 'expected' as prefix. If it is nil or does not have the correct prefix [testing.T.Errorf] will be called
 func AssertHasPrefix(expected string, actual string, t *testing.T, objectName string) {
@@ -61,7 +87,6 @@ func AssertHasPrefix(expected string, actual string, t *testing.T, objectName st
 		t.Errorf("Element %s is not as expected. expected prefix: '%v' actual: '%v'", objectName, expected, actual)
 	}
 }
-
 
 // Checks that 'actual' is not nil and has 'expected' as suffix. If it is nil or does not have the correct suffix [testing.T.Errorf] will be called
 func AssertHasSuffix(expected string, actual string, t *testing.T, objectName string) {
@@ -82,4 +107,19 @@ func isNil(toCheck any) bool {
 	default:
 		return toCheck == nil
 	}
+}
+
+func getKind(i any) reflect.Kind {
+	v := reflect.ValueOf(i)
+	return v.Kind()
+}
+
+func isNotAlmostEqualInt[X IntNumber, Y IntNumber](i1 X, i2 Y) bool {
+	isUInt1 := isUInt(getKind(i1))
+	isUInt2 := isUInt(getKind(i2))
+	return (isUInt1 && !isUInt2 && i2 < 0) || (!isUInt1 && isUInt2 && i1 < 0) || (!isUInt1 && !isUInt2 && int64(i1) != int64(i2)) || uint64(i1) != uint64(i2)
+}
+
+func isUInt(k reflect.Kind) bool {
+	return k == reflect.Uint || k == reflect.Uint8 || k == reflect.Uint16 || k == reflect.Uint32 || k == reflect.Uint64
 }
