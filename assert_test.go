@@ -355,6 +355,102 @@ func checkAssertAlmostEqualsIntNegative[X IntNumber, Y IntNumber](expected X, ac
 }
 
 // ----------------
+// AssertAlmostEqualsFloat
+// ----------------
+func TestAssertAlmostEqualsFloatPositive(t *testing.T) {
+	checkAssertAlmostEqualsFloatPositive(float32(1.0), float32(1.0), 0.01, "float32(1.0),float32(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatPositive(float64(1.0), float64(1.0), 0.01, "float64(1.0),float64(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatPositive(float32(1.0), float64(1.0), 0.01, "float32(1.0),float64(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatPositive(float64(1.0), float32(1.0), 0.01, "float64(1.0),float32(1.0),0.01", t)
+
+	checkAssertAlmostEqualsFloatPositive(float32(1.001), float32(1.0), 0.01, "float32(1.001),float32(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatPositive(float64(1.001), float64(1.0), 0.01, "float64(1.001),float64(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatPositive(float32(1.001), float64(1.0), 0.01, "float32(1.001),float64(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatPositive(float64(1.001), float32(1.0), 0.01, "float64(1.001),float32(1.0),0.01", t)
+
+	checkAssertAlmostEqualsFloatPositive(float32(0.999), float32(1.0), 0.01, "float32(0.999),float32(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatPositive(float64(0.999), float64(1.0), 0.01, "float64(0.999),float64(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatPositive(float32(0.999), float64(1.0), 0.01, "float32(0.999),float64(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatPositive(float64(0.999), float32(1.0), 0.01, "float64(0.999),float32(1.0),0.01", t)
+}
+
+func checkAssertAlmostEqualsFloatPositive[X FloatNumber, Y FloatNumber](expected X, actual Y, delta float64, testUnitName string, t *testing.T) {
+	tc := testing.T{}
+	AssertAlmostEqualsFloat(expected, actual, delta, &tc, testUnitName)
+	if tc.Failed() {
+		t.Errorf("AssertAlmostEqualsFloat is failed at %s", testUnitName)
+	}
+}
+
+func TestAssertAlmostEqualsFloatNegative(t *testing.T) {
+	checkAssertAlmostEqualsFloatNegative(float32(1.1), float32(1.0), 0.01, "float32(1.1),float32(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatNegative(float64(1.1), float64(1.0), 0.01, "float64(1.1),float64(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatNegative(float32(1.1), float64(1.0), 0.01, "float32(1.1),float64(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatNegative(float64(1.1), float32(1.0), 0.01, "float64(1.1),float32(1.0),0.01", t)
+
+	checkAssertAlmostEqualsFloatNegative(float32(0.9), float32(1.0), 0.01, "float32(0.9),float32(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatNegative(float64(0.9), float64(1.0), 0.01, "float64(0.9),float64(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatNegative(float32(0.9), float64(1.0), 0.01, "float32(0.9),float64(1.0),0.01", t)
+	checkAssertAlmostEqualsFloatNegative(float64(0.9), float32(1.0), 0.01, "float64(0.9),float32(1.0),0.01", t)
+}
+
+func checkAssertAlmostEqualsFloatNegative[X FloatNumber, Y FloatNumber](expected X, actual Y, delta float64, testUnitName string, t *testing.T) {
+	tc := testing.T{}
+	AssertAlmostEqualsFloat(expected, actual, delta, &tc, testUnitName)
+	if !tc.Failed() {
+		t.Errorf("AssertAlmostEqualsFloat is not failed at %s", testUnitName)
+	}
+}
+
+// ----------------
+// AssertNotAlmostEqualsFloat
+// ----------------
+func TestAssertNotAlmostEqualsFloatPositive(t *testing.T) {
+	checkAssertNotAlmostEqualsFloatPositive(float32(1.1), float32(1.0), 0.01, "float32(1.1),float32(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatPositive(float64(1.1), float64(1.0), 0.01, "float64(1.1),float64(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatPositive(float32(1.1), float64(1.0), 0.01, "float32(1.1),float64(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatPositive(float64(1.1), float32(1.0), 0.01, "float64(1.1),float32(1.0),0.01", t)
+
+	checkAssertNotAlmostEqualsFloatPositive(float32(0.9), float32(1.0), 0.01, "float32(0.9),float32(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatPositive(float64(0.9), float64(1.0), 0.01, "float64(0.9),float64(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatPositive(float32(0.9), float64(1.0), 0.01, "float32(0.9),float64(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatPositive(float64(0.9), float32(1.0), 0.01, "float64(0.9),float32(1.0),0.01", t)
+}
+
+func checkAssertNotAlmostEqualsFloatPositive[X FloatNumber, Y FloatNumber](expected X, actual Y, delta float64, testUnitName string, t *testing.T) {
+	tc := testing.T{}
+	AssertNotAlmostEqualsFloat(expected, actual, delta, &tc, testUnitName)
+	if tc.Failed() {
+		t.Errorf("AssertNotAlmostEqualsFloat is failed at %s", testUnitName)
+	}
+}
+
+func TestAssertNotAlmostEqualsFloatNegative(t *testing.T) {
+	checkAssertNotAlmostEqualsFloatNegative(float32(1.0), float32(1.0), 0.01, "float32(1.0),float32(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatNegative(float64(1.0), float64(1.0), 0.01, "float64(1.0),float64(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatNegative(float32(1.0), float64(1.0), 0.01, "float32(1.0),float64(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatNegative(float64(1.0), float32(1.0), 0.01, "float64(1.0),float32(1.0),0.01", t)
+
+	checkAssertNotAlmostEqualsFloatNegative(float32(1.001), float32(1.0), 0.01, "float32(1.001),float32(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatNegative(float64(1.001), float64(1.0), 0.01, "float64(1.001),float64(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatNegative(float32(1.001), float64(1.0), 0.01, "float32(1.001),float64(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatNegative(float64(1.001), float32(1.0), 0.01, "float64(1.001),float32(1.0),0.01", t)
+
+	checkAssertNotAlmostEqualsFloatNegative(float32(0.999), float32(1.0), 0.01, "float32(0.999),float32(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatNegative(float64(0.999), float64(1.0), 0.01, "float64(0.999),float64(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatNegative(float32(0.999), float64(1.0), 0.01, "float32(0.999),float64(1.0),0.01", t)
+	checkAssertNotAlmostEqualsFloatNegative(float64(0.999), float32(1.0), 0.01, "float64(0.999),float32(1.0),0.01", t)
+}
+
+func checkAssertNotAlmostEqualsFloatNegative[X FloatNumber, Y FloatNumber](expected X, actual Y, delta float64, testUnitName string, t *testing.T) {
+	tc := testing.T{}
+	AssertNotAlmostEqualsFloat(expected, actual, delta, &tc, testUnitName)
+	if !tc.Failed() {
+		t.Errorf("AssertNotAlmostEqualsFloat is not failed at %s", testUnitName)
+	}
+}
+
+// ----------------
 // AssertNotEquals
 // ----------------
 func TestAssertNotEqualsDifferentValuesPositive(t *testing.T) {
