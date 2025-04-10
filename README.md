@@ -1,8 +1,17 @@
-[![Build and test](https://github.com/Ma-Vin/testutil/actions/workflows/go-build.yaml/badge.svg)](https://github.com/Ma-Vin/testutil/actions/workflows/go-build.yaml)
+[![Build and test](https://github.com/Ma-Vin/testutil-go/actions/workflows/go-build.yaml/badge.svg)](https://github.com/Ma-Vin/testutil-go/actions/workflows/go-build.yaml)
 
 # TestUtil
 
 This repository provides some test utility functions for GoLang modules.
+
+## Sonar analysis
+
+* [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ma-vin%3Atestutil-go&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ma-vin%3Atestutil-go)
+* [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=ma-vin%3Atestutil-go&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=ma-vin%3Atestutil-go)  [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=ma-vin%3Atestutil-go&metric=bugs)](https://sonarcloud.io/summary/new_code?id=ma-vin%3Atestutil-go)
+* [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=ma-vin%3Atestutil-go&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=ma-vin%3Atestutil-go)  [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=ma-vin%3Atestutil-go&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=ma-vin%3Atestutil-go)
+* [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ma-vin%3Atestutil-go&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=ma-vin%3Atestutil-go)  [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=ma-vin%3Atestutil-go&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=ma-vin%3Atestutil-go)  [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=ma-vin%3Atestutil-go&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=ma-vin%3Atestutil-go)
+* [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ma-vin%3Atestutil-go&metric=coverage)](https://sonarcloud.io/summary/new_code?id=ma-vin%3Atestutil-go)
+* [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=ma-vin%3Atestutil-go&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=ma-vin%3Atestutil-go)  [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=ma-vin%3Atestutil-go&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=ma-vin%3Atestutil-go)
 
 ## Asserts
 
