@@ -1,4 +1,4 @@
-[![Release](https://github.com/Ma-Vin/testutil-go/actions/workflows/go-release.yaml/badge.svg?branch=release%2Fv1.0.0)](https://github.com/Ma-Vin/testutil-go/actions/workflows/go-release.yaml)
+[![Release](https://github.com/Ma-Vin/testutil-go/actions/workflows/go-release.yml/badge.svg?branch=release%2Fv1.0.0)](https://github.com/Ma-Vin/testutil-go/actions/workflows/go-release.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/ma-vin/testutil-go.svg)](https://pkg.go.dev/github.com/ma-vin/testutil-go)
 
 # TestUtil
