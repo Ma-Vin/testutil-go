@@ -1,4 +1,5 @@
 [![Build and test](https://github.com/Ma-Vin/testutil-go/actions/workflows/go-build.yaml/badge.svg)](https://github.com/Ma-Vin/testutil-go/actions/workflows/go-build.yaml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/ma-vin/testutil-go.svg)](https://pkg.go.dev/github.com/ma-vin/testutil-go)
 
 # TestUtil
 
