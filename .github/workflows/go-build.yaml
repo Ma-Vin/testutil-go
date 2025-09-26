@@ -37,7 +37,7 @@ jobs:
       - name: Coverage
         run: go test -v -coverprofile='coverage.out' -coverpkg=./... -json ./... > report.json
       - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@v4
+        uses: sonarsource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}      
