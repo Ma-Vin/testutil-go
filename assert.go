@@ -15,8 +15,8 @@ type FloatNumber interface {
 }
 
 const (
-	equalFailedMessageTemplate    = "Element %s is not as expected. expected: '%v' actual: '%v'"
-	notEqualFailedMessageTemplate = "Element %s equals the unexpected. unexpected: '%v' actual: '%v'"
+	equalFailedMessageTemplate    = "Element %s is not as expected.\nexpected: '%v'\nactual:   '%v'"
+	notEqualFailedMessageTemplate = "Element %s equals the unexpected.\nunexpected: '%v'\nactual:     '%v'"
 )
 
 // Checks that 'actual' is not nil. If it is nil [testing.T.Errorf] will be called
