@@ -598,3 +598,41 @@ func TestHasSuffixNegative(t *testing.T) {
 		t.Error("AssertHasSuffix is not failed")
 	}
 }
+
+// ----------------
+// AssertContains
+// ----------------
+func TestContainsPositive(t *testing.T) {
+	tc := testing.T{}
+	AssertContains("SUFFIX", "abcSUFFIX", &tc, "AssertContains")
+	if tc.Failed() {
+		t.Error("AssertContains is failed")
+	}
+}
+
+func TestContainsNegative(t *testing.T) {
+	tc := testing.T{}
+	AssertContains("SUFFIX", "abcSUFFI", &tc, "AssertContains")
+	if !tc.Failed() {
+		t.Error("AssertContains is not failed")
+	}
+}
+
+// ----------------
+// AssertNotContains
+// ----------------
+func TestNotContainsPositive(t *testing.T) {
+	tc := testing.T{}
+	AssertNotContains("SUFFIX", "abcSUFFI", &tc, "AssertNotContains")
+	if !tc.Failed() {
+		t.Error("AssertNotContains is not failed")
+	}
+}
+
+func TestNotContainsNegative(t *testing.T) {
+	tc := testing.T{}
+	AssertNotContains("SUFFIX", "abcSUFFIX", &tc, "AssertNotContains")
+	if tc.Failed() {
+		t.Error("AssertNotContains is failed")
+	}
+}

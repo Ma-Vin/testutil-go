@@ -119,6 +119,24 @@ func AssertHasSuffix(expected string, actual string, t *testing.T, objectName st
 	}
 }
 
+// Checks that 'actual' is not nil and has 'expectedToContain' is contained at 'actual'. If it is nil or does not contain the substring [testing.T.Errorf] will be called
+func AssertContains(expectedToContain string, actual string, t *testing.T, objectName string) {
+	t.Helper()
+	AssertNotNil(actual, t, objectName)
+	if !strings.Contains(actual, expectedToContain) {
+		t.Errorf("Element %s does not contain expected string. expected to be contained: '%v' actual: '%v'", objectName, expectedToContain, actual)
+	}
+}
+
+// Checks that 'actual' is not nil and has 'expectedToContain' is not contained at 'actual'. If it is nil or does contain the substring [testing.T.Errorf] will be called
+func AssertNotContains(expectedToContain string, actual string, t *testing.T, objectName string) {
+	t.Helper()
+	AssertNotNil(actual, t, objectName)
+	if !strings.Contains(actual, expectedToContain) {
+		t.Errorf("Element %s does contain expected string. expected not to be contained: '%v' actual: '%v'", objectName, expectedToContain, actual)
+	}
+}
+
 func isNil(toCheck any) bool {
 	v := reflect.ValueOf(toCheck)
 	k := v.Kind()

@@ -20,6 +20,8 @@ The following checks are available
   - AssertNotAlmostEqualsFloat: analogous to AssertAlmostEqualsFloat
   - AssertHasPrefix
   - AssertHasSuffix
+  - AssertContains
+  - AssertNotContains
 
 # 1.2 Resources
 
