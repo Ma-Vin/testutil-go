@@ -1,3 +1,3 @@
 module github.com/ma-vin/testutil-go
 
-go 1.24.6
+go 1.26.10
