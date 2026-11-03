@@ -61,7 +61,7 @@ func TestDetermineTestCaseFilePathAt(t *testing.T) {
 
 func TestDetermineTestCaseFilePathAtScratchClean(t *testing.T) {
 	_, filename, _, _ := runtime.Caller(0)
-	
+
 	subDirPath := path.Join(path.Dir(filename), "testSub")
 	AssertNil(os.MkdirAll(subDirPath, 0775), t, "os.MkdirAll(subDirPath, 0775)")
 
@@ -97,4 +97,41 @@ func TestDetermineTestCaseFilePathAtClean(t *testing.T) {
 	_, err = os.Stat(existingTestCaseFilePath)
 	AssertNotNil(err, t, "Stat err")
 	AssertHasSuffix(path.Join("testutil-go", "testSub", "resources_test_h.log"), testFilePath, t, "testFilePath")
+}
+
+func TestDetermineTestPathAt(t *testing.T) {
+	_, filename, _, _ := runtime.Caller(0)
+
+	subDirPath := path.Join(path.Dir(filename), "testSub", "scratchA")
+	os.RemoveAll(subDirPath)
+
+	directory, err := DetermineTestPathAt(false, "testSub", "scratchA")
+
+	AssertNil(err, t, "DetermineTestPathAt err")
+	AssertEquals(subDirPath, directory, t, "directory")
+	fileInfo, err := os.Stat(directory)
+	AssertNil(err, t, "os.Stat(directory) err")
+	AssertTrue(fileInfo.IsDir(), t, "fileInfo.IsDir()")
+}
+
+func TestDetermineTestPathAtClean(t *testing.T) {
+	_, filename, _, _ := runtime.Caller(0)
+
+	subDirPath := path.Join(path.Dir(filename), "testSub", "scratchA")
+	AssertNil(os.MkdirAll(subDirPath, 0775), t, "os.MkdirAll(subDirPath, 0775)")
+	testFilePath := path.Join(subDirPath, "testFile.txt")
+	file, err := os.Create(path.Join(subDirPath, "testFile.txt"))
+	AssertNil(err, t, "os.Create err")
+	file.Close()
+	AssertNil(err, t, "file.Close()err")
+
+	directory, err := DetermineTestPathAt(true, "testSub", "scratchA")
+
+	AssertNil(err, t, "DetermineTestPathAt err")
+	AssertEquals(subDirPath, directory, t, "directory")
+	fileInfo, err := os.Stat(directory)
+	AssertNil(err, t, "os.Stat(directory) err")
+	AssertTrue(fileInfo.IsDir(), t, "fileInfo.IsDir() of directory")
+	fileInfo, err = os.Stat(testFilePath)
+	AssertNotNil(err, t, "os.Stat(testFilePath) err")
 }

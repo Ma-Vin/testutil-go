@@ -18,13 +18,8 @@ func DetermineTestCaseFilePath(testCase string, fileEnding string, isScratch boo
 // Equal to DetermineTestCaseFilePath, but the directory of the test files is located based on the project root directory and given sub path elements
 func DetermineTestCaseFilePathAt(testCase string, fileEnding string, isScratch bool, clean bool, subPathElements ...string) string {
 	_, filename, _, _ := runtime.Caller(1)
-	projectRootDir := getProjectRootDir(filename)
+	testCaseDir, err := determineTestPathAt(filename, false, subPathElements...)
 
-	testCaseDir := projectRootDir
-	for _, s := range subPathElements {
-		testCaseDir = path.Join(testCaseDir, s)
-	}
-	err := os.MkdirAll(testCaseDir, 0775)
 	if err != nil {
 		fmt.Printf("Failed to create directory '%s' use directory of caller instead: %v", testCaseDir, err)
 		fmt.Println()
@@ -33,6 +28,34 @@ func DetermineTestCaseFilePathAt(testCase string, fileEnding string, isScratch b
 
 	filePath := path.Join(testCaseDir, path.Base(filename))
 	return determineTestCaseFilePathInternal(filePath, testCase, fileEnding, isScratch, clean)
+}
+
+// Determines the project root directory an creates subdirectories given by subPathElements. If clean is true, all sub directories an files will be removed
+func DetermineTestPathAt(clean bool, subPathElements ...string) (string, error) {
+	_, filename, _, _ := runtime.Caller(1)
+	return determineTestPathAt(filename, clean, subPathElements...)
+}
+
+func determineTestPathAt(filename string, clean bool, subPathElements ...string) (string, error) {
+	projectRootDir := getProjectRootDir(filename)
+
+	testCaseDir := projectRootDir
+	for _, s := range subPathElements {
+		testCaseDir = path.Join(testCaseDir, s)
+	}
+
+	if clean {
+		dirEntries, err := os.ReadDir(testCaseDir)
+		if err == nil {
+			for _, dirEntry := range dirEntries {
+				os.RemoveAll(path.Join(testCaseDir, dirEntry.Name()))
+			}
+		}
+	}
+
+	err := os.MkdirAll(testCaseDir, 0775)
+
+	return testCaseDir, err
 }
 
 func determineTestCaseFilePathInternal(filePath string, testCase string, fileEnding string, isScratch bool, clean bool) string {
