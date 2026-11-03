@@ -92,12 +92,12 @@ func DetermineExistingTestCaseFilePathsAt(testCase string, subPathElements ...st
 }
 
 // Determines all existing test case files for a given path to caller file
-func determineExistingFilePaths(testCase string, callerFilePath string) []string {
+func determineExistingFilePaths(testCase, callerFilePath string) []string {
 	return determineExistingFilePathsAt(testCase, path.Dir(callerFilePath), path.Base(callerFilePath))
 }
 
 // Determines all existing test case files at a given directory and testfile name
-func determineExistingFilePathsAt(testCase string, dirPath string, baseFile string) []string {
+func determineExistingFilePathsAt(testCase, dirPath, baseFile string) []string {
 	dirEntries, err := os.ReadDir(dirPath)
 	res := make([]string, 0)
 	if err == nil {
