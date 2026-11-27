@@ -10,13 +10,13 @@ import (
 
 // Determines the file path for a test case file for the caller of this function. The directory will be equal to the directory of the callers one.
 // The file ending, an indicator whether to append 'scratch' or not and an indicator whether to delete all test case file or not are to pass also.
-func DetermineTestCaseFilePath(testCase string, fileEnding string, isScratch bool, clean bool) string {
+func DetermineTestCaseFilePath(testCase, fileEnding string, isScratch, clean bool) string {
 	_, filename, _, _ := runtime.Caller(1)
 	return determineTestCaseFilePathInternal(filename, testCase, fileEnding, isScratch, clean)
 }
 
 // Equal to DetermineTestCaseFilePath, but the directory of the test files is located based on the project root directory and given sub path elements
-func DetermineTestCaseFilePathAt(testCase string, fileEnding string, isScratch bool, clean bool, subPathElements ...string) string {
+func DetermineTestCaseFilePathAt(testCase, fileEnding string, isScratch, clean bool, subPathElements ...string) string {
 	_, filename, _, _ := runtime.Caller(1)
 	testCaseDir, err := determineTestPathAt(filename, false, subPathElements...)
 
@@ -58,7 +58,7 @@ func determineTestPathAt(filename string, clean bool, subPathElements ...string)
 	return testCaseDir, err
 }
 
-func determineTestCaseFilePathInternal(filePath string, testCase string, fileEnding string, isScratch bool, clean bool) string {
+func determineTestCaseFilePathInternal(filePath, testCase, fileEnding string, isScratch, clean bool) string {
 	if clean {
 		for _, filePath := range determineExistingFilePaths(testCase, filePath) {
 			os.Remove(filePath)

@@ -48,7 +48,7 @@ func AssertFalse(actual bool, t *testing.T, objectName string) {
 }
 
 // Checks that 'actual' is not nil and equal to 'expected'. If it is nil or not equal [testing.T.Errorf] will be called
-func AssertEquals(expected any, actual any, t *testing.T, objectName string) {
+func AssertEquals(expected, actual any, t *testing.T, objectName string) {
 	t.Helper()
 	AssertNotNil(actual, t, objectName)
 	if expected != actual {
@@ -75,7 +75,7 @@ func AssertAlmostEqualsFloat[X FloatNumber, Y FloatNumber](expected X, actual Y,
 }
 
 // Checks that 'actual' is not nil and not equal to 'expected'. If it is nil or equal [testing.T.Errorf] will be called
-func AssertNotEquals(notExpected any, actual any, t *testing.T, objectName string) {
+func AssertNotEquals(notExpected, actual any, t *testing.T, objectName string) {
 	t.Helper()
 	AssertNotNil(actual, t, objectName)
 	if notExpected == actual {
@@ -102,7 +102,7 @@ func AssertNotAlmostEqualsFloat[X FloatNumber, Y FloatNumber](notExpected X, act
 }
 
 // Checks that 'actual' is not nil and has 'expected' as prefix. If it is nil or does not have the correct prefix [testing.T.Errorf] will be called
-func AssertHasPrefix(expected string, actual string, t *testing.T, objectName string) {
+func AssertHasPrefix(expected, actual string, t *testing.T, objectName string) {
 	t.Helper()
 	AssertNotNil(actual, t, objectName)
 	if !strings.HasPrefix(actual, expected) {
@@ -111,7 +111,7 @@ func AssertHasPrefix(expected string, actual string, t *testing.T, objectName st
 }
 
 // Checks that 'actual' is not nil and has 'expected' as suffix. If it is nil or does not have the correct suffix [testing.T.Errorf] will be called
-func AssertHasSuffix(expected string, actual string, t *testing.T, objectName string) {
+func AssertHasSuffix(expected, actual string, t *testing.T, objectName string) {
 	t.Helper()
 	AssertNotNil(actual, t, objectName)
 	if !strings.HasSuffix(actual, expected) {
@@ -120,7 +120,7 @@ func AssertHasSuffix(expected string, actual string, t *testing.T, objectName st
 }
 
 // Checks that 'actual' is not nil and has 'expectedToContain' is contained at 'actual'. If it is nil or does not contain the substring [testing.T.Errorf] will be called
-func AssertContains(expectedToContain string, actual string, t *testing.T, objectName string) {
+func AssertContains(expectedToContain, actual string, t *testing.T, objectName string) {
 	t.Helper()
 	AssertNotNil(actual, t, objectName)
 	if !strings.Contains(actual, expectedToContain) {
@@ -129,7 +129,7 @@ func AssertContains(expectedToContain string, actual string, t *testing.T, objec
 }
 
 // Checks that 'actual' is not nil and has 'expectedToContain' is not contained at 'actual'. If it is nil or does contain the substring [testing.T.Errorf] will be called
-func AssertNotContains(expectedToContain string, actual string, t *testing.T, objectName string) {
+func AssertNotContains(expectedToContain, actual string, t *testing.T, objectName string) {
 	t.Helper()
 	AssertNotNil(actual, t, objectName)
 	if !strings.Contains(actual, expectedToContain) {
