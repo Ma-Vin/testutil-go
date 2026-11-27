@@ -50,3 +50,4 @@ The following functions are available
 * `DetermineTestCaseFilePathAt`: analogous to `DetermineTestCaseFilePath` but the directory starts at the directory of `go.mod` and given sub folders by `subPathElements` parameter
 * `DetermineExistingTestCaseFilePaths`: Returns a slice of paths to file which have a prefix caller name appended by the testcase. E.g. Caller `/some/project/caller.go` would find files like `/some/project/caller_test123.anything` if the testcase is `test123`
 * `DetermineExistingTestCaseFilePathsAt` analogous to `DetermineExistingTestCaseFilePaths` but the directory starts at the directory of `go.mod` and given sub folders by `subPathElements` parameter
+* `DetermineTestPathAt`determines the project root directory an creates subdirectories given by `subPathElements`. If `clean` is true, all sub directories an files will be removed.
